@@ -13,11 +13,8 @@ function AppFrame() {
             </div>
         );
     }
-
     const app_id = app.app_id
-    const app_name = app.app_name
-    // const app_url = `${window.location.host}/${app_id}`
-    const app_url = `http://localhost:80/${app_id}`
+    const app_url = `http://${window.location.host}/${app_id}`
     return (
         <iframe src={app_url} id='app-frame'></iframe>
     );
