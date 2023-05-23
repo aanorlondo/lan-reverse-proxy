@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from '../components/Header';
-import Carousel from '../components/Carousel';
-import AppFrame from '../components/AppFrame';
-import Footer from '../components/Footer';
+import Header from '../components/Header.js';
+import Carousel from '../components/Carousel.js';
+import AppFrame from '../components/AppFrame.js';
+import Footer from '../components/Footer.js';
 
 function Home({ apps }) {
     return (

@@ -2,7 +2,7 @@ import React from "react";
 import github_logo from "../assets/media/footer/github_logo.png";
 import reacjs_logo from "../assets/media/footer/reacjs_logo.png";
 import nginx_logo from "../assets/media/footer/nginx_logo.png";
-import '../assets/css/footer.css';
+import './Footer.css';
 
 function Footer() {
     return (

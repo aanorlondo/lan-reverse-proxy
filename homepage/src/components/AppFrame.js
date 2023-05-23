@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../App';
-import '../assets/css/appFrame.css';
+import './AppFrame.css';
 
 function AppFrame() {
     const { apps, selected_app_id } = useContext(AppContext);

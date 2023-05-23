@@ -1,17 +1,17 @@
 # Stage 1: Build ReactJS app
-FROM node:alpine as build
-
+FROM node:14-alpine AS build-stage
 WORKDIR /app
-COPY package.json package-lock.json ./
+COPY ./homepage/package*.json ./
 RUN npm install
-COPY . .
+COPY ./homepage .
 RUN npm run build
+RUN rm -rf /app/homepage/node_modules
 
 # Stage 2: Setup Nginx server
-FROM nginx:alpine
+FROM nginx:alpine AS production-stage
 
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build-stage /app/build /usr/share/nginx/html
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

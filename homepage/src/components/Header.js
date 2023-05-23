@@ -1,7 +1,7 @@
 import React from 'react';
-import '../assets/css/header.css';
-import header_logo from '../assets/media/header/header_logo.png'
 import { Link } from 'react-router-dom';
+import header_logo from '../assets/media/header/header_logo.png'
+import './Header.css';
 
 function Header() {
     const reloadPage = () => {

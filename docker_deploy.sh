@@ -13,7 +13,7 @@ host_ip=$(ipconfig getifaddr en0)
 docker build -t negan/lan-proxy:local .
 
 # push the image to remote
-docker push negan/lan-proxy:local
+# docker push negan/lan-proxy:local
 
 
 # run the proxy
