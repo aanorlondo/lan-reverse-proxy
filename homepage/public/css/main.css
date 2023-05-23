@@ -1,0 +1,112 @@
+/* APP */
+#app {
+    font-family: 'Courier New', Courier, monospace;
+    flex-direction: column;
+    align-items: center;
+    min-width: 100%;
+    max-width: 98vw;
+    height: 100vh;
+    max-height: 98vh;
+}
+
+
+body {
+    background-color: #687685;
+
+}
+
+/* HEADER */
+
+header {
+    background-color: #eb9966;
+    color: #000000;
+    text-align: center;
+    min-width: 100%;
+    max-width: 100%;
+    border-radius: 20px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: fit-content;
+}
+
+/* CAROUSEL */
+
+#carousel-wrapper {
+    display: flex;
+    justify-content: center;
+    background-color: #b0b0b0;
+    border-radius: 20px;
+}
+
+#carousel {
+    width: 50%;
+    background-color: rgb(136, 197, 249);
+    border-radius: 50px;
+    height: fit-content;
+}
+
+
+/* FRAME */
+#no-app-selected {
+    flex: 1 0 60vh;
+    justify-content: center;
+    display: flex;
+}
+
+#app-frame {
+    flex: 1 0 60vh;
+    width: 99%;
+}
+
+iframe {
+    margin: 0 auto;
+    display: block;
+}
+
+/* FOOTER */
+footer {
+    flex: 0 0;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 12px;
+    background-color: #eb9966;
+    border-radius: 20px;
+    height: fit-content;
+}
+
+#github-logo {
+    max-width: 70px;
+    min-width: 45px;
+}
+
+.copy {
+    font-size: 12px;
+    color: #ffffff;
+}
+
+#react-logo {
+    max-width: 80px;
+    min-width: 25px
+}
+
+#nginx-logo {
+    max-width: 70px;
+    min-width: 40px
+}
+
+#github-logo,
+.copy,
+#vuejs-logo,
+#nodejs-logo {
+    margin-right: 10px;
+}
+
+/* RESPONSIVE */
