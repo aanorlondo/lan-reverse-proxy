@@ -1,0 +1,24 @@
+/* HEADER */
+
+header {
+    background-color: #130b32;
+    text-align: center;
+    min-width: 100%;
+    max-width: 100%;
+    border-radius: 20px;
+}
+
+#header-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: fit-content;
+    font-size: 13px;
+    color: #ffffff;
+}
+
+#header-logo {
+    width: 40px;
+}

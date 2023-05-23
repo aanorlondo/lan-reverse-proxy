@@ -3,6 +3,7 @@ import { Carousel as ReactCarousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../App';
+import '../assets/css/carousel.css';
 
 
 function Carousel() {
@@ -13,15 +14,21 @@ function Carousel() {
         select_app_id(app_id);
     };
 
+    const setId = (app_id) => {
+        const id = `${app_id}-thumb`
+        return id
+    }
+
     return (
         <div id="carousel-wrapper">
             <div id="carousel">
-                <ReactCarousel showArrows={true} showThumbs={true}>
+                <ReactCarousel showArrows={true} showThumbs={false}>
                     {
                         apps.map((app) => (
                             <div key={app.app_id}>
-                                <Link to="#" onClick={() => handleAppClick(app.app_id)}>
-                                    <h4>{app.app_name}</h4>
+                                <Link to="#" onClick={() => handleAppClick(app.app_id)} className='link'>
+                                    <img className="carousel-image" id={setId(app.app_id)} />
+                                    <h2 className="carousel-legend">{app.app_name}</h2>
                                 </Link>
                             </div>
                         ))

@@ -1,0 +1,44 @@
+/* CAROUSEL */
+
+#carousel-wrapper {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #b0b0b0;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+#carousel {
+    width: 100%;
+    background-color: transparent;
+}
+
+.carousel-image {
+    height: 100px;
+    background-size: cover;
+}
+
+
+.carousel-legend {
+    color: #000000;
+    height: 40px;
+    font-size: 20px;
+    margin-bottom: 30px;
+    margin-top: -90px;
+}
+
+
+/* Apps Thumbs */
+#clipboards-app-thumb {
+    background-image: url(../media/carousel/clipboards-app.png);
+}
+
+#my-app-2-thumb {
+    background-image: url(../media/carousel/my-app-2.png);
+}
+
+#my-app-3-thumb {
+    background-image: url(../media/carousel/my-app-3.png);
+}
