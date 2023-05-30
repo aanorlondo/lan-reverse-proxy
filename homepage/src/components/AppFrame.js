@@ -1,6 +1,5 @@
-// http://macbookpro-de-khaled.lan
-
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AppContext } from '../App';
 import './AppFrame.css';
 import python_logo from "../assets/media/appframe/python_logo.png";
@@ -53,7 +52,7 @@ function AppFrame() {
                 app_id: selected_app_id // Include the app_id in the request body
             };
 
-            const response = await fetch('/appdetails-api/', {
+            const response = await fetch('http://macbookpro-de-khaled.lan/appdetails-api/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -96,113 +95,137 @@ function AppFrame() {
 
     return (
         <div id="app-details">
-            <div className="app-fields">
-                <h2 id="app-name-title">{isEditing ? 'Edit App Details' : appDetails.name || 'Not named yet'}</h2>
-                <p className='appdetails-entry'>
-                    Name:
-                    {isEditing ? (
-                        <input
-                            type="text"
-                            name="name"
-                            value={editedAppDetails.name}
-                            onChange={handleInputChange}
-                        />
-                    ) : (
-                        appDetails.name
-                    )}
-                </p>
-                <p className='appdetails-entry'>
-                    Description:
-                    {isEditing ? (
-                        <input
-                            type="text"
-                            name="description"
-                            value={editedAppDetails.description}
-                            onChange={handleInputChange}
-                        />
-                    ) : (
-                        appDetails.description
-                    )}
-                </p>
-                <p className='appdetails-entry'>
-                    URL:
-                    {isEditing ? (
-                        <input
-                            type="text"
-                            name="url"
-                            value={editedAppDetails.url}
-                            onChange={handleInputChange}
-                        />
-                    ) : (
-                        appDetails.url
-                    )}
-                </p>
-                <p className='appdetails-entry'>
-                    Frontend:
-                    {isEditing ? (
-                        <input
-                            type="text"
-                            name="frontend_technology"
-                            value={editedAppDetails.frontend_technology}
-                            onChange={handleInputChange}
-                        />
-                    ) : (
-                        appDetails.frontend_technology
-                    )}
-                </p>
-                <p className='appdetails-entry'>
-                    Backend:
-                    {isEditing ? (
-                        <input
-                            type="text"
-                            name="backend_technology"
-                            value={editedAppDetails.backend_technology}
-                            onChange={handleInputChange}
-                        />
-                    ) : (
-                        appDetails.backend_technology
-                    )}
-                </p>
-                <p className='appdetails-entry'>
-                    Database:
-                    {isEditing ? (
-                        <input
-                            type="text"
-                            name="database_technology"
-                            value={editedAppDetails.database_technology}
-                            onChange={handleInputChange}
-                        />
-                    ) : (
-                        appDetails.database_technology
-                    )}
-                </p>
-                <p className='appdetails-entry'>
-                    Author:
-                    {isEditing ? (
-                        <input
-                            type="text"
-                            name="author"
-                            value={editedAppDetails.author}
-                            onChange={handleInputChange}
-                        />
-                    ) : (
-                        appDetails.author
-                    )}
-                </p>
-                <p className='appdetails-entry'>
-                    Github:
-                    {isEditing ? (
-                        <input
-                            type="text"
-                            name="github_url"
-                            value={editedAppDetails.github_url}
-                            onChange={handleInputChange}
-                        />
-                    ) : (
-                        appDetails.github_url
-                    )}
-                </p>
-                <div className='buttons-div'>
+            <div id="app-fields">
+                <h2 id="fields-title">{isEditing ? 'Edit App' : appDetails.name} Technical Sheet</h2>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td className='table-field'>Name</td>
+                            <td>
+                                {isEditing ? (
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        value={editedAppDetails.name}
+                                        onChange={handleInputChange}
+                                    />
+                                ) : (
+                                    appDetails.name || 'Not named yet'
+                                )}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className='table-field'>Description</td>
+                            <td>
+                                {isEditing ? (
+                                    <input
+                                        type="text"
+                                        name="description"
+                                        value={editedAppDetails.description}
+                                        onChange={handleInputChange}
+                                    />
+                                ) : (
+                                    appDetails.description
+                                )}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className='table-field'>URL</td>
+                            <td>
+                                {isEditing ? (
+                                    <input
+                                        type="text"
+                                        name="url"
+                                        value={editedAppDetails.url}
+                                        onChange={handleInputChange}
+                                    />
+                                ) : (
+                                    <Link to={appDetails.url} target="_blank" rel="noopener noreferrer">
+                                        {appDetails.url}
+                                    </Link>
+                                )}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className='table-field'>Frontend</td>
+                            <td>
+                                {isEditing ? (
+                                    <input
+                                        type="text"
+                                        name="frontend_technology"
+                                        value={editedAppDetails.frontend_technology}
+                                        onChange={handleInputChange}
+                                    />
+                                ) : (
+                                    <img className="front-logo" src={appDetails.frontend_technology}></img>
+                                )}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className='table-field'>Backend</td>
+                            <td>
+                                {isEditing ? (
+                                    <input
+                                        type="text"
+                                        name="backend_technology"
+                                        value={editedAppDetails.backend_technology}
+                                        onChange={handleInputChange}
+                                    />
+                                ) : (
+                                    <img className="back-logo" src={appDetails.backend_technology}></img>
+                                )}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className='table-field'>Database</td>
+                            <td>
+                                {isEditing ? (
+                                    <input
+                                        type="text"
+                                        name="database_technology"
+                                        value={editedAppDetails.database_technology}
+                                        onChange={handleInputChange}
+                                    />
+                                ) : (
+                                    <img className="database-logo" src={appDetails.database_technology}></img>
+                                )}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className='table-field'>Author</td>
+                            <td>
+                                {isEditing ? (
+                                    <input
+                                        type="text"
+                                        name="author"
+                                        value={editedAppDetails.author}
+                                        onChange={handleInputChange}
+                                    />
+                                ) : (
+                                    appDetails.author
+                                )}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className='table-field'>Github</td>
+                            <td>
+                                {isEditing ? (
+                                    <input
+                                        type="text"
+                                        name="github_url"
+                                        value={editedAppDetails.github_url}
+                                        onChange={handleInputChange}
+                                    />
+                                ) : (
+                                    <Link to={appDetails.github_url} target="_blank" rel="noopener noreferrer">
+                                        {appDetails.github_url}
+                                    </Link>
+                                )}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div className="buttons-div">
                     {isEditing ? (
                         <>
                             <button onClick={handleSaveClick}>Save</button>

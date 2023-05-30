@@ -9,6 +9,7 @@
     border-radius: 40px;
     cursor: pointer;
     border: none;
+    margin-top: 30px;
 }
 
 #no-app-selected {
@@ -20,16 +21,22 @@
     font-style: italic;
 }
 
+#fields-title {
+    width: 100%;
+    text-align: center;
+}
+
 #app-details {
     display: flex;
-    flex-direction: column;
     flex-grow: 1;
     justify-content: center;
     align-items: center;
 }
 
-.app-fields {
-    width: 60%;
+#app-fields {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
     padding: 5px;
     padding-left: 20px;
     padding-right: 20px;
@@ -37,9 +44,23 @@
     border-radius: 40px;
 }
 
-#app-name-title {
+#app-fields input {
     width: 100%;
-    text-align: center;
+}
+
+/* TABLE */
+.table-field {
+    width: 130px;
+    font-weight: bold;
+}
+
+#app-fields th,
+td {
+    border-bottom: 1px solid #ddd;
+}
+
+#app-fields tr:hover {
+    background-color: rgb(210, 238, 238);
 }
 
 .buttons-div {
@@ -47,8 +68,35 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
 }
+
+#app-fields table {
+    padding: 50px;
+    padding-bottom: 0px;
+    padding-top: 30px;
+}
+
+@media (max-width: 600px) {
+    #app-fields table {
+        padding: 10px;
+    }
+}
+
+/* TECH LOGOS */
+.front-logo {
+    width: 70px;
+}
+
+.back-logo {
+    width: 55px;
+}
+
+.database-logo {
+    width: 110px
+}
+
+/* LOGOS */
 
 #tech-list {
     display: flex;
@@ -60,7 +108,6 @@
     font-style: italic;
     font-weight: bold;
 }
-
 
 #python-logo {
     width: 40px;

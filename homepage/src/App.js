@@ -10,7 +10,7 @@ function App() {
         [
             {
                 app_id: 'clipboards-app',
-                app_name: 'Clipboards App',
+                app_name: 'Clipboards',
             },
             {
                 app_id: 'my-app-2',
