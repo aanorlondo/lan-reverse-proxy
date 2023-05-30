@@ -1,17 +1,75 @@
 /* FRAME */
+
+.buttons-div button {
+    background-color: #190f23;
+    color: #ffffff;
+    padding: 5px 5px;
+    height: 40px;
+    width: 80px;
+    border-radius: 40px;
+    cursor: pointer;
+    border: none;
+}
+
 #no-app-selected {
-    justify-content: center;
     display: flex;
     flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    font-style: italic;
 }
 
-#app-frame {
-    width: 99%;
-}
-
-iframe {
-    margin: 0 auto;
-    display: block;
-    width: 100%;
+#app-details {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-fields {
+    width: 60%;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #ffffff;
+    border-radius: 40px;
+}
+
+#app-name-title {
+    width: 100%;
+    text-align: center;
+}
+
+.buttons-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#tech-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: small;
+    font-style: italic;
+    font-weight: bold;
+}
+
+
+#python-logo {
+    width: 40px;
+}
+
+#flask-logo {
+    width: 70px;
+}
+
+#psql-logo {
+    width: 80px;
 }
