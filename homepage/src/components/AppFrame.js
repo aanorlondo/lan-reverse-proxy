@@ -24,7 +24,7 @@ function AppFrame() {
 
     const fetchAppDetails = async () => {
         try {
-            const response = await fetch(`http://macbookpro-de-khaled.lan/appdetails-api/?app_id=${selected_app_id}`);
+            const response = await fetch(`/appdetails-api/?app_id=${selected_app_id}`);
             const data = await response.json();
             if (response.ok) {
                 setAppDetails(data.data || {}); // Use an empty object if data is null or undefined
@@ -52,7 +52,7 @@ function AppFrame() {
                 app_id: selected_app_id // Include the app_id in the request body
             };
 
-            const response = await fetch('http://macbookpro-de-khaled.lan/appdetails-api/', {
+            const response = await fetch('/appdetails-api/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
