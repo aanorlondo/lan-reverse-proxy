@@ -1,0 +1,29 @@
+/* APP */
+#app {
+    font-family: 'Courier New', Courier, monospace;
+    flex-direction: column;
+    align-items: center;
+    min-width: 100%;
+    max-width: 98vw;
+    height: 100vh;
+    max-height: 98vh;
+}
+
+body {
+    background-color: #687685;
+
+}
+
+#home {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    height: 100%;
+}
+
+
+.link {
+    text-decoration: none;
+}
+
+/* RESPONSIVE */

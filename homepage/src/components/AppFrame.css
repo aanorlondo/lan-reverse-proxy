@@ -1,0 +1,17 @@
+/* FRAME */
+#no-app-selected {
+    justify-content: center;
+    display: flex;
+    flex-grow: 1;
+}
+
+#app-frame {
+    width: 99%;
+}
+
+iframe {
+    margin: 0 auto;
+    display: block;
+    width: 100%;
+    flex-grow: 1;
+}
