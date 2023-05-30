@@ -1,17 +1,122 @@
 /* FRAME */
+
+.buttons-div button {
+    background-color: #190f23;
+    color: #ffffff;
+    padding: 5px 5px;
+    height: 40px;
+    width: 80px;
+    border-radius: 40px;
+    cursor: pointer;
+    border: none;
+    margin-top: 30px;
+}
+
 #no-app-selected {
-    justify-content: center;
     display: flex;
     flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    font-style: italic;
 }
 
-#app-frame {
-    width: 99%;
-}
-
-iframe {
-    margin: 0 auto;
-    display: block;
+#fields-title {
     width: 100%;
+    text-align: center;
+}
+
+#app-details {
+    display: flex;
     flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+#app-fields {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #ffffff;
+    border-radius: 40px;
+}
+
+#app-fields input {
+    width: 100%;
+}
+
+/* TABLE */
+.table-field {
+    width: 130px;
+    font-weight: bold;
+}
+
+#app-fields th,
+td {
+    border-bottom: 1px solid #ddd;
+}
+
+#app-fields tr:hover {
+    background-color: rgb(210, 238, 238);
+}
+
+.buttons-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+#app-fields table {
+    padding: 50px;
+    padding-bottom: 0px;
+    padding-top: 30px;
+}
+
+@media (max-width: 600px) {
+    #app-fields table {
+        padding: 10px;
+    }
+}
+
+/* TECH LOGOS */
+.front-logo {
+    width: 70px;
+}
+
+.back-logo {
+    width: 55px;
+}
+
+.database-logo {
+    width: 110px
+}
+
+/* LOGOS */
+
+#tech-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: small;
+    font-style: italic;
+    font-weight: bold;
+}
+
+#python-logo {
+    width: 40px;
+}
+
+#flask-logo {
+    width: 70px;
+}
+
+#psql-logo {
+    width: 80px;
 }
