@@ -13,8 +13,8 @@ function App() {
                 app_name: 'Clipboards',
             },
             {
-                app_id: 'my-app-2',
-                app_name: 'My app 2',
+                app_id: 'go-auth',
+                app_name: 'Go Auth Server',
             },
             {
                 app_id: 'my-app-3',
