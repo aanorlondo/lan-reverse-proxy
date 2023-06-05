@@ -20,6 +20,7 @@ docker push negan/lan-proxy:local
 docker run \
     -d \
     -p 80:80 \
+    -p 443:443 \
     --name LAN-PROXY-LOCAL \
     --add-host="host:${host_ip}" \
     negan/lan-proxy:local

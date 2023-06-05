@@ -30,3 +30,6 @@ logs/
 # Ignore OS-generated files
 .DS_Store
 Thumbs.db
+
+# Ignore SSL certs
+ssl/
