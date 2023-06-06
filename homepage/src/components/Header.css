@@ -1,11 +1,14 @@
 /* HEADER */
 
 header {
+    /* position: sticky;
+    top: 0px; */
     background-color: #130b32;
     text-align: center;
     min-width: 100%;
     max-width: 100%;
     border-radius: 20px;
+    z-index: 10;
 }
 
 #header-content {
@@ -13,12 +16,54 @@ header {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    height: fit-content;
     font-size: 13px;
     color: #ffffff;
 }
 
 #header-logo {
     width: 40px;
+    height: 40px;
+}
+
+.header-link {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    vertical-align: middle;
+    align-items: center;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.header-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: -10px;
+}
+
+.header-buttons button {
+    background-color: rgb(232, 179, 55);
+    border: none;
+    border-radius: 5px;
+}
+
+#header-forms {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#header-forms button {
+    background-color: transparent;
+    border: none;
+}
+
+button {
+    cursor: pointer;
 }
