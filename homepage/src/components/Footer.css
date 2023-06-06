@@ -1,5 +1,7 @@
 /* FOOTER */
 footer {
+    /* position: sticky;
+    bottom: 0px; */
     display: flex;
     align-items: center;
     justify-content: center;

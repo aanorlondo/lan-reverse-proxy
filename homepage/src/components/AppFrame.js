@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../App';
-import './AppFrame.css';
+import Cookies from 'js-cookie';
 import python_logo from "../assets/media/appframe/python_logo.png";
 import flask_logo from "../assets/media/appframe/flask_logo.png";
 import psql_logo from "../assets/media/appframe/psql_logo.png";
+import project_architecture from "../assets/media/appframe/project_architecture.png"
+import './AppFrame.css';
 
 function AppFrame() {
     const { selected_app_id } = useContext(AppContext);
@@ -52,10 +54,12 @@ function AppFrame() {
                 app_id: selected_app_id // Include the app_id in the request body
             };
 
+            const jwtToken = Cookies.get('jwt'); // Get the JWT token from the cookie
             const response = await fetch('/appdetails-api/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${jwtToken}`, // Include the JWT token in the request header
                 },
                 body: JSON.stringify(requestBody),
             });
@@ -66,6 +70,7 @@ function AppFrame() {
                 fetchAppDetails(); // Refresh the details after saving
             } else {
                 console.error('Failed to save app details:', data.message);
+                window.alert('Failed to save app details: ' + data.message + '. You need higher privileges !');
             }
         } catch (error) {
             console.error('Error while saving app details:', error);
@@ -87,8 +92,13 @@ function AppFrame() {
 
     if (!appDetails) {
         return (
-            <div id="no-app-selected">
-                No app selected
+            <div className="welcome-wrapper">
+                < div id="no-app-selected" >
+                    Welcome to Khaled's local server. You can vizualize the project architecture below. Select an App in the carousel above to display its technical sheet.
+                </div >
+                <div id="project-architecture-div">
+                    <img src={project_architecture} id="project-architecture-png"></img>
+                </div>
             </div>
         );
     }
