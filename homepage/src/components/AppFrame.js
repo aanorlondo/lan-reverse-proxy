@@ -5,6 +5,7 @@ import './AppFrame.css';
 import python_logo from "../assets/media/appframe/python_logo.png";
 import flask_logo from "../assets/media/appframe/flask_logo.png";
 import psql_logo from "../assets/media/appframe/psql_logo.png";
+import project_architecture from "../assets/media/appframe/project_architecture.png"
 
 function AppFrame() {
     const { selected_app_id } = useContext(AppContext);
@@ -87,8 +88,13 @@ function AppFrame() {
 
     if (!appDetails) {
         return (
-            <div id="no-app-selected">
-                No app selected
+            <div className="welcome-wrapper">
+                < div id="no-app-selected" >
+                    Welcome to Khaled's local server. You can vizualize the project architecture below. Select an App in the carousel above to display its technical sheet.
+                </div >
+                <div id="project-architecture-div">
+                    <img src={project_architecture} id="project-architecture-png"></img>
+                </div>
             </div>
         );
     }

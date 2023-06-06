@@ -12,14 +12,35 @@
     margin-top: 30px;
 }
 
-#no-app-selected {
-    display: flex;
+.welcome-wrapper {
     flex-grow: 1;
+}
+
+#no-app-selected {
+    margin-top: 10px;
+    display: flex;
     justify-content: center;
     align-items: center;
     font-size: large;
     font-style: italic;
+    color: #ffffff;
+    font-size: small;
 }
+
+
+#project-architecture-div {
+    display: flex;
+    justify-content: center;
+}
+
+#project-architecture-png {
+    width: 70%;
+    max-width: 90%;
+    border-radius: 10px;
+    border-style: solid;
+    margin: 10px;
+}
+
 
 #fields-title {
     width: 100%;

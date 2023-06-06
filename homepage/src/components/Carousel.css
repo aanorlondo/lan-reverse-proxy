@@ -1,8 +1,8 @@
 /* CAROUSEL */
 
 #carousel-wrapper {
-    position: sticky;
-    top: 0;
+    /* position: sticky;
+    top: 0; */
     display: flex;
     justify-content: center;
     background-color: #b0b0b0;
