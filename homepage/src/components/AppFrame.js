@@ -243,7 +243,9 @@ function AppFrame() {
                         <img id="python-logo" src={python_logo}></img>
                     </p>
                     <p>
-                        <img id="flask-logo" src={flask_logo}></img>
+                        <Link to="https://macbookpro-de-khaled.lan/appdetails-swagger/" target="_blank" rel="noopener noreferrer">
+                            <img id="flask-logo" src={flask_logo}></img>
+                        </Link>
                     </p>
                     <p>
                         <img id="psql-logo" src={psql_logo}></img>
