@@ -37,6 +37,7 @@ function Header() {
 
     const signOut = () => {
         Cookies.remove('jwt');
+        Cookies.remove('username');
         setIsLoggedIn(false);
         setShowLoginForm(false);
         setShowSignupForm(false);
@@ -70,10 +71,12 @@ function Header() {
                 })
                 .then((data) => {
                     Cookies.set('jwt', data.token);
+                    Cookies.set('username', username);
                     setIsLoggedIn(true);
                     setShowLoginForm(false);
                     setShowSignupForm(false);
                     setShowEditProfileForm(false);
+                    setLoginForm({ username: '', password: '' });
                 })
                 .catch((error) => {
                     console.error('Error during login:', error);
@@ -103,10 +106,12 @@ function Header() {
                 })
                 .then((data) => {
                     Cookies.set('jwt', data.token);
+                    Cookies.set('username', username);
                     setIsLoggedIn(true);
                     setShowLoginForm(false);
                     setShowSignupForm(false);
                     setShowEditProfileForm(false);
+                    setSignupForm({ username: '', password: '' });
                 })
                 .catch((error) => {
                     console.error('Error during signup:', error);
@@ -143,6 +148,7 @@ function Header() {
                     setShowEditProfileForm(false);
                     setShowLoginForm(false);
                     setShowSignupForm(false);
+                    setEditProfileForm({ password: '' });
                 })
                 .catch((error) => {
                     console.error('Error updating profile:', error);
@@ -171,6 +177,10 @@ function Header() {
         setEditProfileForm({ password: '' });
         setShowEditProfileForm(false);
     };
+
+    const getUsername = () => {
+        return Cookies.get('username')
+    }
 
     return (
         <header>
@@ -240,6 +250,7 @@ function Header() {
                 )}
                 {showEditProfileForm && (
                     <form onSubmit={handleUpdateProfile} onReset={resetEditProfileForm}>
+                        <i className='logged-as'>Logged as '{getUsername()}'  </i>
                         <input
                             type='password'
                             placeholder='New Password'

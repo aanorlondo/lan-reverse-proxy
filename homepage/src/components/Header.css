@@ -59,6 +59,11 @@ header {
     margin-bottom: 5px;
 }
 
+.logged-as {
+    font-size: small;
+    color: #ffffff;
+}
+
 #header-forms button {
     background-color: transparent;
     border: none;
