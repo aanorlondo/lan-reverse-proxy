@@ -59,7 +59,15 @@ function Header() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password }),
             })
-                .then((response) => response.json())
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else if (response.status === 401) {
+                        throw new Error('Invalid credentials.');
+                    } else {
+                        throw new Error('Unexpected error occurred.');
+                    }
+                })
                 .then((data) => {
                     Cookies.set('jwt', data.token);
                     setIsLoggedIn(true);
@@ -69,7 +77,7 @@ function Header() {
                 })
                 .catch((error) => {
                     console.error('Error during login:', error);
-                    window.alert('Error during login: ' + error);
+                    window.alert('Error during login: ' + error.message);
                 });
         }
     };
@@ -84,7 +92,15 @@ function Header() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password }),
             })
-                .then((response) => response.json())
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else if (response.status === 409) {
+                        throw new Error('User already exists.');
+                    } else {
+                        throw new Error('Unexpected error occurred.');
+                    }
+                })
                 .then((data) => {
                     Cookies.set('jwt', data.token);
                     setIsLoggedIn(true);
@@ -94,7 +110,7 @@ function Header() {
                 })
                 .catch((error) => {
                     console.error('Error during signup:', error);
-                    window.alert('Error during signup: ' + error);
+                    window.alert('Error during signup: ' + error.message);
                 });
         }
     };
@@ -112,20 +128,29 @@ function Header() {
                 },
                 body: JSON.stringify({ password }),
             })
-                .then((response) => response.json())
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else if (response.status === 404) {
+                        throw new Error('User not found.');
+                    } else {
+                        throw new Error('Unexpected error occurred.');
+                    }
+                })
                 .then((data) => {
                     console.log('Profile updated successfully:', data);
-                    window.alert('Profile updated successfully')
+                    window.alert('Profile updated successfully');
                     setShowEditProfileForm(false);
                     setShowLoginForm(false);
                     setShowSignupForm(false);
                 })
                 .catch((error) => {
                     console.error('Error updating profile:', error);
-                    window.alert('Error updating profile:' + error);
+                    window.alert('Error updating profile: ' + error.message);
                 });
         }
     };
+
 
     // Check login status on component mount
     useEffect(() => {
