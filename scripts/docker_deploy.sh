@@ -11,7 +11,7 @@ docker rmi negan/lan-proxy:local
 host_ip=$(ipconfig getifaddr en0)
 
 # build the proxy
-docker build -t negan/lan-proxy:local .
+docker build -t negan/lan-proxy:local ../
 
 # push the image to remote
 docker push negan/lan-proxy:local
