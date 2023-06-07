@@ -41,7 +41,7 @@ lan-reverse-proxy
 
 ## 📍 Overview
 
-The lan-reverse-proxy project is a Node.js-based web application that serves as a reverse proxy server for local area network (LAN) applications. It allows users to access different LAN apps such as clipboards, tech-sheets, and go-auth through a single domain. The project includes an Nginx server, a ReactJS app, and APIs for data fetching and editing. The project's value proposition is to simplify and streamline the access to multiple LAN applications for users, especially those who work with a range of apps for their day-to-day work.
+The project is a LAN reverse proxy that allows users to host multiple web applications on a local server and access them through a single point of entry. It utilizes Nginx to handle routing and SSL/TLS certificate settings, while the front-end is built using React and React Router. The project provides a user-friendly interface for managing and accessing hosted applications, as well as authentication and user profile functionality. The LAN reverse proxy is a valuable tool for developers and small businesses looking to host multiple applications on a single server while maintaining security and ease of access.
 
 ---
 
@@ -49,15 +49,15 @@ The lan-reverse-proxy project is a Node.js-based web application that serves as 
 
 Feature | Description |
 |---|---|
-| **🏗 Structure and Organization** | The codebase follows a clear separation of concerns, with the React app in the "homepage" directory and Nginx configuration in "nginx.conf". |
-| **📝 Code Documentation** | The code has minimal documentation. |
-| **🧩 Dependency Management** | The dependencies are managed using Docker and specified in the Dockerfile. |
-| **♻️ Modularity and Reusability** | The app is designed with modularity in mind, with smaller components such as Header, Carousel, AppFrame, and Footer. |
-| **✔️ Testing and Quality Assurance** | There are no test cases included in the codebase for the moment. |
+| **🏗 Structure and Organization** | The codebase follows a traditional web application structure with a homepage containing a carousel of apps and individual pages for each app. The code is organized into appropriate directories and files with clear naming conventions. |
+| **📝 Code Documentation** | The codebase has sufficient documentation and comments in each file and function to ensure a clear understanding of the code's functionality and purpose. |
+| **🧩 Dependency Management** | Dependencies are managed through npm lock files with clear version specifications, ensuring consistency across environments. |
+| **♻️ Modularity and Reusability** | The codebase is organized with modular components, allowing for easy reuse and maintainability. The use of React and React Router libraries further promotes modularity and component-based development. |
+| **✔️ Testing and Quality Assurance** | The codebase lacks automated tests for the moment |
 | **⚡️ Performance and Optimization** | The codebase includes the use of state management for the React app, which can boost performance by minimizing unnecessary re-renders. |
 | **🔒 Security Measures** | The codebase includes SSL certificate and private key for secure communication with the Nginx server. |
-| **🔄 Version Control and Collaboration** | The codebase is hosted on GitHub. Major changes as integrated through Pull Requests. |
-| **🔌 External Integrations** | The codebase makes use of APIs to interact with backend servers for authentication and to fetch app data. |
+| **🔄 Version Control and Collaboration** | The codebase is hosted on GitHub and follows a clear version control system with frequent commits and clear commit messages, promoting effective team collaboration. |
+| **🔌 External Integrations** | The codebase includes external libraries for React, React Router, and Nginx, enabling extended functionality and integration with other systems. |
 | **📈 Scalability and Extensibility** | The code structure with small components allows for easy expansion and scalability in handling additional apps and features. |
 
 ---
@@ -73,7 +73,8 @@ repo
 ├── Dockerfile
 ├── LICENSE
 ├── README.md
-├── docker_deploy.sh
+├── config
+│   └── nginx.conf
 ├── homepage
 │   ├── package.json
 │   ├── public
@@ -112,10 +113,11 @@ repo
 │       ├── index.js
 │       └── pages
 │           └── Home.js
-├── nginx.conf
-└── prepare_env.sh
+└── scripts
+    ├── docker_deploy.sh
+    └── prepare_env.sh
 
-12 directories, 32 files
+14 directories, 32 files
 ```
 
 ---
@@ -126,60 +128,74 @@ repo
 
 <details closed><summary>Components</summary>
 
-| File         | Summary                                                                                                                                                                                                                                                                                                                                                              | Module                               |
-|:-------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------|
-| AppFrame.js  | This code provides the functionality for displaying and editing the technical details of a selected app. It communicates with an API to fetch and save the app details, and allows the user to edit the details and save them. Additionally, it dynamically displays the logos of the technologies used in the app's frontend, backend, and database.                | homepage/src/components/AppFrame.js  |
-| Header.js    | This code snippet represents a React component for a header, with functionalities to handle login, sign up, edit profile, logout, and check login status. It makes API requests to a backend server using the Fetch API and uses the Cookies library to store user authentication details. The component also renders different forms based on user actions.         | homepage/src/components/Header.js    |
-| Carousel.css | The provided code snippet defines the CSS styles for a carousel. It sets the display to flex, and the background color to grey. It also specifies the styles for the carousel buttons, images and legends. Additionally, it includes the CSS styles for individual app thumbnails that are used in the carousel.                                                     | homepage/src/components/Carousel.css |
-| Carousel.js  | This code snippet defines a React component called "Carousel" that displays a set of app images inside a carousel. When an app image is clicked, it triggers a function that selects the corresponding app ID. It also adds a link and legend to each app image. The component imports React libraries, as well as custom CSS and context from the parent component. | homepage/src/components/Carousel.js  |
-| AppFrame.css | The provided code snippet contains CSS styles for a web page that displays project details. It includes styling for buttons, a project architecture image, a table, and logos for various technologies used in the project. The CSS also includes media queries for responsiveness on smaller screens.                                                               | homepage/src/components/AppFrame.css |
-| Header.css   | The code snippet defines the styling for a webpage header that includes a logo, links, buttons, and forms. The header is designed to be sticky and centered on the page, with a background color of #130b32 and border radius of 20px. The code also includes specific styling for the various elements within the header, such as font size, alignment, and color.  | homepage/src/components/Header.css   |
-| Footer.css   | The provided code snippet defines the styling for a footer section of a web page. It utilizes flexbox to center and align content, sets background color and border radius, and contains logos for Github, React, and Nginx. The code sets maximum and minimum widths for the logos and sets the font size and color for the text.                                   | homepage/src/components/Footer.css   |
-| Footer.js    | The code provides a React functional component for a footer, which consists of links to a GitHub repository with associated icons. The component also displays the React.js and Nginx logos. The footer includes a copyright notice.                                                                                                                                 | homepage/src/components/Footer.js    |
+| File         | Summary                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Module                               |
+|:-------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------|
+| AppFrame.js  | The code snippet is a React component that renders an app's technical sheet with details such as name, description, URL, frontend/backend technologies, author, and Github URL. The component allows for editing and saving changes with authentication using JWT tokens. It also displays a project architecture diagram and logos of technologies used in the app.                                                                                                                                                                                          | homepage/src/components/AppFrame.js  |
+| Header.js    | This code snippet defines a React component called Header, which provides authentication and user profile editing functionality. It includes state variables to track login status and various forms for logging in, signing up and updating user profile, each with their own handlers. It also makes use of Cookies library to store JWT tokens and user information. The component is rendered at the top of the application's UI, displaying logo and login/sign up buttons, as well as forms that are conditionally displayed based on user interaction. | homepage/src/components/Header.js    |
+| Carousel.css | The code snippet defines the styles for a carousel component, including the wrapper, buttons, and images. It also includes the styling for app thumbnails that can be used within the carousel. The code uses flexbox and background images to achieve the desired appearance.                                                                                                                                                                                                                                                                                | homepage/src/components/Carousel.css |
+| Carousel.js  | This is a React component that renders a carousel of images, with each image displaying the name of an app and linked to an onClick event. The component imports React, Carousel, Link, and AppContext from their respective modules and uses them to render the carousel.                                                                                                                                                                                                                                                                                    | homepage/src/components/Carousel.js  |
+| AppFrame.css | The provided code snippet contains CSS styling rules for different elements of a web page, including buttons, tables, logos, and media queries for different screen sizes. The CSS styling includes specifications for the height, width, padding, border, and background color of various elements. There are also rules for the display, alignment, and spacing of elements using flexbox.                                                                                                                                                                  | homepage/src/components/AppFrame.css |
+| Header.css   | The code snippet provides styling for a header element. It includes properties for styling the background color, font size, and button styles. The header also includes elements for displaying a logo, links, and buttons, and is designed to be responsive with a minimum and maximum width of 100%.                                                                                                                                                                                                                                                        | homepage/src/components/Header.css   |
+| Footer.css   | The provided code snippet styles the footer of a webpage using flexbox, sets the font size, background color, and border radius. It also includes logos for GitHub, React, and NGINX, which have varying widths and are styled with a white background color, border radius, and minimum/maximum width properties. Finally, a copyright statement is included with white text on the same background color as the footer.                                                                                                                                     | homepage/src/components/Footer.css   |
+| Footer.js    | The code imports logos and a CSS file, and defines a Footer component that returns a JSX element containing HTML. This footer displays logos for GitHub, React.Js, and Nginx, as well as a copyright notice. The component is exported for use in other parts of the app.                                                                                                                                                                                                                                                                                     | homepage/src/components/Footer.js    |
+
+</details>
+
+<details closed><summary>Config</summary>
+
+| File       | Summary                                                                                                                                                                                                                                                                                                     | Module            |
+|:-----------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------|
+| nginx.conf | This is a configuration file for the Nginx web server. It includes SSL/TLS certificate settings and various location blocks for different apps and static content. Requests to each location are proxied to specific ports on the server. The file also automatically redirects all HTTP requests to HTTPS. | config/nginx.conf |
 
 </details>
 
 <details closed><summary>Css</summary>
 
-| File     | Summary                                                                                                                                                                                                                                                                                                   | Module                       |
-|:---------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------|
-| main.css | The code sets the styling for the APP container element, including font, layout, and dimensions. It also defines a background color for the body and layout for the home element. The code concludes by defining a text decoration for links and adding a comment indicating that the code is responsive. | homepage/public/css/main.css |
+| File     | Summary                                                                                                                                                                                                                                                                                                             | Module                       |
+|:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------|
+| main.css | The code snippet provides styles for a web application. The #app element is styled to be a column layout with a specific font, width, and height, while the body has a background color. The #home section has a column layout and the link class has no text decoration. The code also includes responsive styles. | homepage/public/css/main.css |
 
 </details>
 
 <details closed><summary>Pages</summary>
 
-| File    | Summary                                                                                                                                                                                                                                                                                                  | Module                     |
-|:--------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------|
-| Home.js | The code imports components such as Header, Carousel, AppFrame and Footer in a React application. The Home function takes an "apps" parameter and returns these components wrapped in a div with the id "home". This function is then exported as the default for use in other parts of the application. | homepage/src/pages/Home.js |
+| File    | Summary                                                                                                                                                                                                                                                                                                                                                                                 | Module                     |
+|:--------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------|
+| Home.js | The code imports components such as Header, Carousel, AppFrame, and Footer, which are then rendered within a function called Home. The Home function takes in a single parameter called apps and returns a JSX element that contains all the imported components within a div element with an id of "home". Finally, the Home function is exported as the default export of the module. | homepage/src/pages/Home.js |
 
 </details>
 
 <details closed><summary>Public</summary>
 
-| File       | Summary                                                                                                                                                                                                                                          | Module                     |
-|:-----------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------|
-| index.html | The code snippet is a basic HTML document that includes a title, a favicon, and a link to an external CSS stylesheet. The body contains a div with an ID of "app" and a message that appears if JavaScript is not enabled on the user's browser. | homepage/public/index.html |
+| File       | Summary                                                                                                                                                                                                                                                                                                                                                                                                        | Module                     |
+|:-----------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------|
+| index.html | The code snippet is an HTML file that includes the necessary metadata and links to an external CSS file and favicon. It also includes a container div with the ID "app", suggesting it is intended to be used in conjunction with JavaScript to build a dynamic web application. Additionally, it includes a message for users who have disabled JavaScript. The title of the page is "Khaled's Local Server". | homepage/public/index.html |
 
 </details>
 
 <details closed><summary>Root</summary>
 
-| File             | Summary                                                                                                                                                                                                                                                                                                                                                      | Module           |
-|:-----------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------|
-| Dockerfile       | The code snippet is a Dockerfile that helps build a ReactJS app and set up an Nginx server to serve the app. In stage 1, the app is built and packaged. In stage 2, Nginx is installed and configured to serve the app on ports 80 and 443. The SSL certificate and private key are also copied to their respective directories.                             | Dockerfile       |
-| docker_deploy.sh | This bash script prepares environment variables, removes any existing Docker containers and images, configures an Nginx proxy to be in the same network as the host, builds the proxy, and runs it with specified ports and environment variables. The script is intended to automate the setup of a local LAN proxy server.                                 | docker_deploy.sh |
-| prepare_env.sh   | This Bash script exports the hostname of the current machine as well as an authentication server URL that includes the hostname. The script then writes this URL to the React app's configuration file in the'homepage' directory.                                                                                                                           | prepare_env.sh   |
-| nginx.conf       | This code snippet defines an NGINX server configuration that listens on ports 80 and 443. It also contains location directives that define how incoming requests should be handled for various endpoints such as a homepage, a clipboards app, a tech-sheets app, and a go-auth server. The server also includes SSL configuration for secure communication. | nginx.conf       |
+| File       | Summary                                                                                                                                                                                                                                                                                                                                             | Module     |
+|:-----------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------|
+| Dockerfile | The provided code snippet consists of two stages. The first stage uses Node.js to build a ReactJS app and installs the necessary dependencies before generating a build and removing unused files. The second stage uses Nginx to set up a server that serves the content generated in the first stage and exposes it on both port 80 and port 443. | Dockerfile |
+
+</details>
+
+<details closed><summary>Scripts</summary>
+
+| File             | Summary                                                                                                                                                                                                                                                                                                                                                                            | Module                   |
+|:-----------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------|
+| docker_deploy.sh | This code snippet prepares the environment variables, cleans the docker container and images named LAN-PROXY-LOCAL and negan/lan-proxy:local, configures the nginx proxy to the same network as the host, builds and pushes the image to the remote, and eventually runs the proxy on port 80 and 443 with the environment variable AUTH_SERVER and with the name LAN-PROXY-LOCAL. | scripts/docker_deploy.sh |
+| prepare_env.sh   | The provided code snippet is a bash script that exports the hostname environment variable and sets the auth server address based on that hostname. It then writes this address to a.env file located in the "homepage" directory. This script is likely used as part of a larger application deployment or configuration process.                                                  | scripts/prepare_env.sh   |
 
 </details>
 
 <details closed><summary>Src</summary>
 
-| File     | Summary                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Module                |
-|:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------|
-| index.js | The given code imports React, creates a root element using React-DOM and renders the React component'App.js' to the HTML element with ID'app' in the DOM. This allows the application to be displayed in the browser.                                                                                                                                                                                                                                                     | homepage/src/index.js |
-| App.js   | The code snippet creates an AppContext using React's createContext and useState hooks to store an array of objects representing different apps, with their ids and names. It also stores a state selected_app_id using useState, which is initially null, but can be set to the id of the selected app. The AppContext.Provider wraps the Router component and provides the context to its child components. The Home component is rendered for the root path of the app. | homepage/src/App.js   |
+| File     | Summary                                                                                                                                                                                                                                                                                                                                                                                                     | Module                |
+|:---------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------|
+| index.js | This code snippet imports the React and createRoot libraries and an App component. It renders the App component to an HTML element with the ID "app" using the createRoot.render method from the React DOM library. This allows the App component to be displayed as a web page.                                                                                                                            | homepage/src/index.js |
+| App.js   | The code snippet utilizes React and the React Router library to create a web application. An app context is created and used to store an array of apps and the ID of the currently selected app. The <Routes> component is used to define the page routes, with the <Route> component used to specify the component to render for a given URL path. The <Home> component is rendered for the root URL path. | homepage/src/App.js   |
 
 </details>
 
@@ -227,7 +243,7 @@ npm test
 
 ## 🗺 Roadmap
 
-> - [ ] [📌  Task 1: Implement Unit Tests]
+> - [ ] Task 1: Implement Unit Tests
 
 
 ---
