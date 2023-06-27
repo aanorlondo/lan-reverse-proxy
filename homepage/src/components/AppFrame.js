@@ -13,6 +13,7 @@ function AppFrame() {
     const [appDetails, setAppDetails] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
     const [editedAppDetails, setEditedAppDetails] = useState(null);
+    const appdetailsEndpoint = process.env.REACT_APP_APPDETAILS_SERVER;
 
     useEffect(() => {
         if (selected_app_id) {
@@ -253,7 +254,7 @@ function AppFrame() {
                         <img id="python-logo" src={python_logo}></img>
                     </p>
                     <p>
-                        <Link to="https://macbookpro-de-khaled.lan/appdetails-swagger/" target="_blank" rel="noopener noreferrer">
+                        <Link to={appdetailsEndpoint} target="_blank" rel="noopener noreferrer">
                             <img id="flask-logo" src={flask_logo}></img>
                         </Link>
                     </p>

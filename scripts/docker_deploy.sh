@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # prepare env vars
-sh ./prepare_env.sh
+source ./prepare_env.sh
 
 # clean first
 docker rm -f LAN-PROXY-LOCAL
@@ -22,6 +22,7 @@ docker run \
     -p 80:80 \
     -p 443:443 \
     -e AUTH_SERVER=${AUTH_SERVER} \
+    -e APPDETAILS_SERVER=${APPDETAILS_SERVER} \
     --add-host="host:${host_ip}" \
     --name LAN-PROXY-LOCAL \
     negan/lan-proxy:local
